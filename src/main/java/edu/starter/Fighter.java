@@ -1,4 +1,5 @@
 package edu.starter;
+
 /** fighter class represents a player character in the game.
  * It has attributes for health, resources, attack ability, and defense ability.
  * 
@@ -8,6 +9,7 @@ package edu.starter;
  *   0 <= resources <= MAX_RESOURCES
  *   0 <= pending_defense
 */
+
 public class Fighter {
     private static final double MAX_HEALTH = 100;
     private static final double MAX_RESOURCES = 10;

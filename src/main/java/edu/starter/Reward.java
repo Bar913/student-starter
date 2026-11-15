@@ -1,8 +1,23 @@
 package edu.starter;
 
+/**
+ * Reward enum represents the possible rewards a player can choose after winning an encounter.
+ */
+
 public enum Reward {
     RECOVERY,
     POWER;
+
+    /**
+     * Applies the reward to the given player, modifying its state according to the reward type.
+     *
+     * @pre player != null
+     * @pre the reward was not already applied in this adventure
+     *      (the caller, Main, guarantees this)
+     * 
+     * @post RECOVERY: hp == min(MAX_HEALTH, old hp + 25);
+     * @post POWER: attack == old attack + 2;
+     */
 
     public void applyTo(Fighter player) {
         switch (this) {

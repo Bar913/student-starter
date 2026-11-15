@@ -3,6 +3,16 @@ import java.util.Scanner;
 
 public final class Main{
 
+    /**
+     * Runs the game with two encounters against mobs, allowing the player to choose actions and rewards.
+     *
+     * @post if encounter 1 is lost: prints "game lost", no reward offered,
+     *       no encounter 2
+     * @post if encounter 1 is won: exactly one valid reward is applied to the
+     *       same player object, then encounter 2 starts against a fresh 45 HP Mob
+     * @post invalid reward input changes no state and is asked again
+     */
+
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         Fighter player = new Fighter(100, 5);
@@ -45,6 +55,17 @@ public final class Main{
 
         scanner.close();
     }
+
+    /**
+     * Runs an encounter between the player and the enemy, allowing the player to choose actions until one of them is defeated.
+     *
+     * @pre player != null && enemy != null && scanner != null
+     * @pre player.isalive() && enemy.isalive()
+     * 
+     * @post an illegal action prints "invalid action", consumes no turn and
+     *       triggers no enemy counterattack
+     * @post pending defense is equal to 0 when the encounter starts
+     */
 
         public static boolean encounter(Fighter player, Mob enemy, int number, Scanner scanner){
 
