@@ -74,7 +74,7 @@ public final class Main{
         while (enemy.isalive() && player.isalive()){
 
             System.out.println("num encounter = " + number);
-            System.out.println("player hpsp = " + player.gethp());
+            System.out.println("player hp = " + player.gethp());
             System.out.println("player resources = " + player.getresources());
             System.out.println("player attack = " + player.getattack_ability());
             System.out.println("enemy hp = " + enemy.gethp());
