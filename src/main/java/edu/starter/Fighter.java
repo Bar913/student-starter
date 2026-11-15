@@ -1,5 +1,13 @@
 package edu.starter;
-
+/** fighter class represents a player character in the game.
+ * It has attributes for health, resources, attack ability, and defense ability.
+ * 
+ * The class provides methods for taking damage, attacking enemies, defending, healing, upgrading attack, recovering resources, and performing special attacks.
+ * Invariants:
+ *   0 <= hp <= MAX_HEALTH
+ *   0 <= resources <= MAX_RESOURCES
+ *   0 <= pending_defense
+*/
 public class Fighter {
     private static final double MAX_HEALTH = 100;
     private static final double MAX_RESOURCES = 10;
@@ -79,6 +87,12 @@ public class Fighter {
         pending_defense = 0;
     }
 
+    /**
+     * Restores health
+     *
+     * @pre amount > 0
+     * @post hp == min(MAX_HEALTH, old hp + amount)
+     */
     public void heal(double amount) {
         hp += amount;
         if (hp > MAX_HEALTH){
@@ -86,11 +100,27 @@ public class Fighter {
         }
     }
 
+    /**
+     * Increases attack damage
+     *
+     * @pre amount > 0
+     * @post attack_ability == old attack_ability + amount
+     */
     public void upgradeattack(double amount) {
         attack_ability += amount;
     }
+
+    /**
+     * Recovers resources
+     *
+     * @post if resources < MAX_RESOURCES: returns true and
+     *       resources = min(MAX_RESOURCES, (old resources + RECOVER_ABILITY))
+     * @post else: returns false and
+     *       resources = MAX_RESOURCES
+     */
     public boolean recover(){
         if (resources >= MAX_RESOURCES){
+            resources = MAX_RESOURCES;
             return false;
         }
         resources += RECOVER_ABILITY;
@@ -100,6 +130,15 @@ public class Fighter {
         return true;
     }
 
+    /**
+     * Uses the special attack on the given enemy
+     *
+     * @pre enemy != null
+     * @post if resources >= SPECIAL_COST: returns true, resources decreased by
+     *       exactly SPECIAL_COST, and the enemy took SPECIAL_ABILITY damage
+     * @post else: returns false and
+     * no state changed
+     */
     public boolean special(Mob enemy) {
         if (resources < SPECIAL_COST){
             return false;
