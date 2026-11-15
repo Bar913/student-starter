@@ -6,9 +6,9 @@ public class Fighter {
     private static final double RECOVER_ABILITY = 3;
     private static final double SPECIAL_COST = 3;
     private static final double SPECIAL_ABILITY = 15;
-    private static final double ATTACK_ABILITY = 10;
     private static final double DEFENSE_ABILITY = 5;
 
+    private double attack_ability = 10;
     private double pending_defense;
     private double hp;
     private double resources;
@@ -25,6 +25,10 @@ public class Fighter {
 
     public double getresources() {
         return resources;
+    }
+
+    public double getattack_ability() {
+        return attack_ability;
     }
 
     public double getmax_health() {
@@ -64,7 +68,7 @@ public class Fighter {
     }
 
     public void attack(Mob enemy) {
-        enemy.takedamage(ATTACK_ABILITY);
+        enemy.takedamage(attack_ability);
     }
 
     public void defend() {
@@ -75,16 +79,26 @@ public class Fighter {
         pending_defense = 0;
     }
 
-public boolean recover(){
-    if (resources >= MAX_RESOURCES){
-        return false;
+    public void heal(double amount) {
+        hp += amount;
+        if (hp > MAX_HEALTH){
+            hp = MAX_HEALTH;
+        }
     }
-    resources += RECOVER_ABILITY;
-    if (resources > MAX_RESOURCES){
-        resources = MAX_RESOURCES;
+
+    public void upgradeattack(double amount) {
+        attack_ability += amount;
     }
-    return true;
-}
+    public boolean recover(){
+        if (resources >= MAX_RESOURCES){
+            return false;
+        }
+        resources += RECOVER_ABILITY;
+        if (resources > MAX_RESOURCES){
+            resources = MAX_RESOURCES;
+        }
+        return true;
+    }
 
     public boolean special(Mob enemy) {
         if (resources < SPECIAL_COST){

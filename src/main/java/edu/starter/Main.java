@@ -16,6 +16,23 @@ public final class Main{
             return;
         }
 
+        Reward chosen = null;
+        while (chosen == null){
+            System.out.println("choose one reward: recovery, power");
+            String input = scanner.nextLine();
+
+            if (input.equals("recovery")){
+                chosen = Reward.RECOVERY;
+            }
+            else if (input.equals("power")){
+                chosen = Reward.POWER;
+            }
+            else{
+                System.out.println("invalid reward");
+            }
+        }
+        chosen.applyTo(player);
+
         Mob enemy2 = new Mob(45);
         boolean won_encounter2 = encounter(player, enemy2, 2, scanner);
 
@@ -23,7 +40,7 @@ public final class Main{
             System.out.println("game won");
         }
         else{
-            System.out.println("game won");
+            System.out.println("game lost");
         }
 
         scanner.close();
@@ -35,10 +52,11 @@ public final class Main{
 
         while (enemy.isalive() && player.isalive()){
 
-                    System.out.println("num encounter " + number);
-            System.out.println("player hp=" + player.gethp());
-            System.out.println("player resources=" + player.getresources());
-            System.out.println("enemy hp=" + enemy.gethp());
+            System.out.println("num encounter = " + number);
+            System.out.println("player hpsp = " + player.gethp());
+            System.out.println("player resources = " + player.getresources());
+            System.out.println("player attack = " + player.getattack_ability());
+            System.out.println("enemy hp = " + enemy.gethp());
 
             System.out.println("pls choose: attack, defend, special, recover");
             String action = scanner.nextLine();

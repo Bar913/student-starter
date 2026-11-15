@@ -1,7 +1,7 @@
 package edu.starter;
 
 public class Mob {
-    private static final double ATTACK_ABILITY = 10;
+    private double attack_ability = 10;
     private double max_hp;
     private double hp;
 
@@ -18,7 +18,7 @@ public class Mob {
     }
 
     public double getattack_ability() {
-        return ATTACK_ABILITY;
+        return attack_ability;
     }
 
     public double getmax_hp() {

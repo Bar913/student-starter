@@ -7,12 +7,12 @@ public enum Reward {
     public void applyTo(Fighter player) {
         switch (this) {
             case RECOVERY:
-                player.sethp(player.gethp() + 25);
-                System.out.println("Restored 20 HP!");
+                player.heal(25);
+                System.out.println("restored 25 hp (max) to fighter");
                 break;
             case POWER:
-                player.setResources(player.getResources() + 2);
-                System.out.println("Gained +2 Resources!");
+                player.upgradeattack(2);
+                System.out.println("fighter gained +2 to basic attack");
                 break;
         }
     }
