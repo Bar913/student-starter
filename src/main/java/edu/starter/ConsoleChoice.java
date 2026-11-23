@@ -1,6 +1,5 @@
 package edu.starter;
 import java.util.Scanner;
-/** Optional small UI utility; never put battle rules here. */
 public final class ConsoleChoice {
  private ConsoleChoice(){}
  public static int read(Scanner in, int min, int max){
