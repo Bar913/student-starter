@@ -5,18 +5,18 @@ package edu.starter;
  * 
  * The class provides methods for taking damage, attacking enemies, defending, healing, upgrading attack, recovering resources, and performing special attacks.
  * Invariants:
- *   0 <= hp <= MAX_HEALTH
- *   0 <= resources <= MAX_RESOURCES
+ *   0 <= hp <= max_health
+ *   0 <= resources <= max_resources
  *   0 <= pending_defense
 */
 
-public class Fighter {
-    private static final double MAX_HEALTH = 100;
-    private static final double MAX_RESOURCES = 10;
-    private static final double RECOVER_ABILITY = 3;
-    private static final double SPECIAL_COST = 3;
-    private static final double SPECIAL_ABILITY = 15;
-    private static final double DEFENSE_ABILITY = 5;
+public abstract class Fighter {
+    private double max_health = 100;
+    private double max_resources = 10;
+    private double recover_ability = 3;
+    private double special_cost = 3;
+    private double special_ability = 15;
+    private double defense_ability = 5;
 
     private double attack_ability = 10;
     private double pending_defense;
@@ -42,11 +42,11 @@ public class Fighter {
     }
 
     public double getmax_health() {
-        return MAX_HEALTH;
+        return max_health;
     }
 
     public double getmax_resources() {
-        return MAX_RESOURCES;
+        return max_resources;
     }
 
     public double getpending_defense() {
@@ -54,11 +54,11 @@ public class Fighter {
     }
 
     public double getrecover_abilty() {
-        return RECOVER_ABILITY;
+        return recover_ability;
     }
 
     public double getspecial_ability() {
-        return SPECIAL_ABILITY;
+        return special_ability;
     }
 
     public boolean isalive() {
@@ -82,7 +82,7 @@ public class Fighter {
     }
 
     public void defend() {
-        pending_defense = DEFENSE_ABILITY;
+        pending_defense = defense_ability;
     }
 
     public void cleardefense() {
@@ -93,12 +93,12 @@ public class Fighter {
      * Restores health
      *
      * @pre amount > 0
-     * @post hp == min(MAX_HEALTH, old hp + amount)
+     * @post hp == min(max_health, old hp + amount)
      */
     public void heal(double amount) {
         hp += amount;
-        if (hp > MAX_HEALTH){
-            hp = MAX_HEALTH;
+        if (hp > max_health){
+            hp = max_health;
         }
     }
 
@@ -115,19 +115,19 @@ public class Fighter {
     /**
      * Recovers resources
      *
-     * @post if resources < MAX_RESOURCES: returns true and
-     *       resources = min(MAX_RESOURCES, (old resources + RECOVER_ABILITY))
+     * @post if resources < max_resources: returns true and
+     *       resources = min(max_resources, (old resources + recover_ability))
      * @post else: returns false and
-     *       resources = MAX_RESOURCES
+     *       resources = max_resources
      */
     public boolean recover(){
-        if (resources >= MAX_RESOURCES){
-            resources = MAX_RESOURCES;
+        if (resources >= max_resources){
+            resources = max_resources;
             return false;
         }
-        resources += RECOVER_ABILITY;
-        if (resources > MAX_RESOURCES){
-            resources = MAX_RESOURCES;
+        resources += recover_abilty;
+        if (resources > max_resources){
+            resources = max_resources;
         }
         return true;
     }
@@ -136,16 +136,16 @@ public class Fighter {
      * Uses the special attack on the given enemy
      *
      * @pre enemy != null
-     * @post if resources >= SPECIAL_COST: returns true, resources decreased by
-     *       exactly SPECIAL_COST, and the enemy took SPECIAL_ABILITY damage
+     * @post if resources >= special_cost: returns true, resources decreased by
+     *       exactly special_cost, and the enemy took special_ability damage
      * @post else: returns false and
      * no state changed
      */
     public boolean special(Mob enemy) {
-        if (resources < SPECIAL_COST){
+        if (resources < special_cost){
             return false;
         }
-        resources -= SPECIAL_COST;
+        resources -= special_cost;
         enemy.takedamage(getspecial_ability());
         return true;
     }
